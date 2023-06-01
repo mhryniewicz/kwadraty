@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kwadraty</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Oto swiat niesamowitego ksztaltu jakim jest kwadrat!</h1>
+  </header>
+
+  <section>
+    <h2>Kwadraty w przyrodzie</h2>
+    <label for="kwadrat1">ALE KWADRAT :O</label>
+    <img src="zdj1.png" alt="kwadrat1">
+    <label for="kwadrat2">Niezly kwadracik B]</label>
+    <img src="zdj2.png" alt="kwadrat2">
+    <label for="trojkat">To nie jest kwadrat >:c</label>
+    <img src="zdj3.png" alt="trojkat">
+
+  </section>
+
+  <section>
+    <h2>Zmieniajacy kolory kwadrat</h2>
+    <form>
+      <label for="kolor">Podaj kolor:</label>
+      <input type="text" id="kolor" name="kolor" required>
+
+      <input type="button" value="Zmień kolor" onclick="zmienKolor()">
+    </form>
+
+    <table>
+      <tr>
+        <td id="kwadrat" class="kwadrat">Zmieniam kolory</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Wszystkie kwadraty w naszym archiwum kwadratów</h2>
+    <button onclick="wyswietlKwadraty()">Pokaz kwadraty</button>
+    <div id="wyniki"></div>
+  </section>
+
+  <footer>
+    <p>Strone wykonal Michal Hryniewicz</p>
+  </footer>
+
+  <script>
+    function zmienKolor() {
+      var input = document.getElementById('kolor');
+      var kolor = input.value;
+
+      var kwadrat = document.getElementById('kwadrat');
+      kwadrat.style.backgroundColor = kolor;
+    }
+
+    function wyswietlKwadraty() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          document.getElementById('wyniki').innerHTML = xhr.responseText;
+        }
+      };
+      xhr.open("GET", "skrypt.php", true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
